@@ -2,17 +2,40 @@ import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import CommentCard from "./CommentCard";
+import { format } from "date-fns";
 
 export default function Article() {
   let { article_id } = useParams();
   const [currArticle, setCurrArticle] = useState({});
+  const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  console.log(currArticle);
+
   useEffect(() => {
     axios
       .get(`https://nc-news-app-ftk2.onrender.com/api/articles/${article_id}`)
       .then((res) => {
         setCurrArticle(res.data.article);
+        return axios.get(
+          `https://nc-news-app-ftk2.onrender.com/api/articles/${article_id}/comments`
+        );
+      })
+      .then((res) => {
+        setComments(res.data.comments);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError("Failed to load article data.");
+        setLoading(false);
       });
-  }, []);
+  }, [article_id]);
+
+  if (loading) return <p>Loading..</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div>
       <Header />
@@ -36,13 +59,28 @@ export default function Article() {
             Author: {currArticle.author}
           </h3>
           <p className="text-gray-800 mb-4">{currArticle.body}</p>
-          <p className="text-gray-500 mb-2">
-            <em>Published on: {currArticle.created_at}</em>
+          <p className="text-gray-500 mb-2 italic">
+            Published on:{" "}
+            {currArticle.created_at
+              ? format(new Date(currArticle.created_at), "MMMM d, yyyy")
+              : "Unknown date"}
           </p>
           <p className="text-gray-600">
             <strong>Comments:</strong> {currArticle.comment_count}
           </p>
         </div>
+      </section>
+      <section className="mx-auto p-4 bg-white shadow-md rounded-lg flex flex-col w-4/5 mt-5">
+        <h2 className="text-2xl font-bold mb-2 border-b-2 ">Comments</h2>
+        <ul>
+          {comments.map((comment) => {
+            return (
+              <li key={comment.comment_id} className="border-b-2">
+                <CommentCard comment={comment} />
+              </li>
+            );
+          })}
+        </ul>
       </section>
     </div>
   );
