@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import CommentCard from "./CommentCard";
 import { format } from "date-fns";
+import { getArticleByID, getCommentsByID } from "../../../utils";
 
-export default function Article() {
-  let { article_id } = useParams();
+export default function ArticleInfo() {
+  const { article_id } = useParams();
   const [currArticle, setCurrArticle] = useState({});
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,16 +16,13 @@ export default function Article() {
   console.log(currArticle);
 
   useEffect(() => {
-    axios
-      .get(`https://nc-news-app-ftk2.onrender.com/api/articles/${article_id}`)
-      .then((res) => {
-        setCurrArticle(res.data.article);
-        return axios.get(
-          `https://nc-news-app-ftk2.onrender.com/api/articles/${article_id}/comments`
-        );
+    getArticleByID(article_id)
+      .then((articleInfo) => {
+        setCurrArticle(articleInfo);
+        return getCommentsByID(article_id);
       })
-      .then((res) => {
-        setComments(res.data.comments);
+      .then((comments) => {
+        setComments(comments);
         setLoading(false);
       })
       .catch((err) => {

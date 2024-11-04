@@ -1,4 +1,3 @@
-import React from "react";
 import { format } from "date-fns";
 
 function CommentCard({ comment }) {
