@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import Header from "../Header";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import CommentCard from "./CommentCard";
 import { format } from "date-fns";
 import { getArticleByID, getCommentsByID } from "../../../utils";
@@ -36,7 +34,6 @@ export default function ArticleInfo() {
 
   return (
     <div>
-      <Header />
       <section className="mx-auto p-4 bg-white shadow-md rounded-lg flex flex-row w-4/5">
         <div>
           <img
