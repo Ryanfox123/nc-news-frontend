@@ -18,7 +18,8 @@ function ArticleList() {
         setLoading(false);
       });
   }, []);
-
+  if (loading) return <p>Loading..</p>;
+  if (error) return <p>{error}</p>;
   return (
     <div className="w-8/12 mx-auto">
       <ul className="flex flex-col gap-5">
