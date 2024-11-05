@@ -1,9 +1,22 @@
 import { format } from "date-fns";
+import DeleteCommentBtn from "./deleteCommentBtn";
 
-function CommentCard({ comment }) {
+import { UserContext } from "../../context/UserContext";
+import { useContext } from "react";
+
+function CommentCard({ comment, setComments }) {
+  const { user } = useContext(UserContext);
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-2">{comment.author}</h3>
+      <div className="flex flex-row justify-between">
+        <h3 className="text-lg font-semibold mb-2">{comment.author}</h3>
+        {user.username === comment.author ? (
+          <DeleteCommentBtn
+            commentID={comment.comment_id}
+            setComments={setComments}
+          />
+        ) : null}
+      </div>
       <p className="text-gray-600 mb-2">
         <strong>Votes:</strong> {comment.votes}
       </p>
