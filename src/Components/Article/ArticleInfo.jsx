@@ -7,6 +7,7 @@ import {
   getCommentsByID,
   patchArticleVotes,
 } from "../../../utils";
+import CreateComment from "./createComment";
 
 export default function ArticleInfo() {
   const { article_id } = useParams();
@@ -130,6 +131,11 @@ export default function ArticleInfo() {
           })}
         </ul>
       </section>
+      <CreateComment
+        comments={comments}
+        setComments={setComments}
+        articleID={currArticle.article_id}
+      />
     </div>
   );
 }

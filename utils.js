@@ -17,7 +17,15 @@ export const getArticleByID = (id) => {
 
 export const getCommentsByID = (id) => {
   return api.get(`/articles/${id}/comments`).then((res) => {
+    console.log(res, "ALL COMMENTS");
     return res.data.comments;
+  });
+};
+
+export const postCommentByID = (id, body, user) => {
+  const commentBody = { username: user, body: body };
+  return api.post(`/articles/${id}/comments`, commentBody).then((res) => {
+    return res.data.comment;
   });
 };
 
