@@ -16,9 +16,14 @@ export const getArticleByID = (id) => {
 };
 
 export const getCommentsByID = (id) => {
-  return api
-    .get(`https://nc-news-app-ftk2.onrender.com/api/articles/${id}/comments`)
-    .then((res) => {
-      return res.data.comments;
-    });
+  return api.get(`/articles/${id}/comments`).then((res) => {
+    return res.data.comments;
+  });
+};
+
+export const patchArticleVotes = (id, inc) => {
+  const voteBody = { inc_votes: inc };
+  return api.patch(`/articles/${id}`, voteBody).then((res) => {
+    return res;
+  });
 };
