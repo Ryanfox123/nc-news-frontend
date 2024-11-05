@@ -20,7 +20,6 @@ export default function ArticleInfo() {
   const [commentError, setCommentError] = useState(null);
 
   const handleUpvote = () => {
-    //votechange will be 1 if neither buttons are toggle, 2 if downvote is already toggled or -1 if i untoggle upvote. this is then passed into my api for patch method.
     const voteChange = upvote ? -1 : downvote ? 2 : 1;
     setUpvote(!upvote);
     setDownvote(false);
