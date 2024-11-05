@@ -28,6 +28,12 @@ export const postCommentByID = (id, body, user) => {
   });
 };
 
+export const deleteCommentByID = (id) => {
+  return api.delete(`/comments/${id}`).then((res) => {
+    return res;
+  });
+};
+
 export const patchArticleVotes = (id, inc) => {
   const voteBody = { inc_votes: inc };
   return api.patch(`/articles/${id}`, voteBody).then((res) => {

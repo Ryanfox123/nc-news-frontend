@@ -124,7 +124,11 @@ export default function ArticleInfo() {
           {comments.map((comment) => {
             return (
               <li key={comment.comment_id} className="border-b-2">
-                <CommentCard comment={comment} />
+                <CommentCard
+                  comment={comment}
+                  currArticle={currArticle}
+                  setComments={setComments}
+                />
               </li>
             );
           })}
