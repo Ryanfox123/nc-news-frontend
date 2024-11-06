@@ -5,7 +5,14 @@ function Header() {
     <div>
       <p className="underline text-end p-2"></p>
       <h1 className="w-52 mx-auto font-extrabold text-4xl my-11">
-        <Link to="/">NC NEWS</Link>
+        <Link
+          to="/"
+          onClick={() => {
+            setSortByVals({});
+          }}
+        >
+          NC NEWS
+        </Link>
       </h1>
     </div>
   );

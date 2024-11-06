@@ -18,7 +18,14 @@ function TopicList({ topics, setTopics }) {
           return (
             <li key={topic.slug} className="border-b-2">
               <p className="hover:underline">
-                <Link to={`/t/${topic.slug}`}>{topic.slug}</Link>
+                <Link
+                  to={`/t/${topic.slug}`}
+                  onClick={() => {
+                    setSortByVals({});
+                  }}
+                >
+                  {topic.slug}
+                </Link>
               </p>
               <p className="text-gray-500 italic text-sm">
                 {topic.description}

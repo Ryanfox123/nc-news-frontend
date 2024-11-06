@@ -13,8 +13,8 @@ function SortingArticlesMenu({ setSortByVals }) {
   };
   return (
     <div className="flex flex-row gap-3 justify-end mb-3">
+      <p>Sort by:</p>
       <select id="sort-by-val" onChange={handleQueryChange}>
-        <option value="created_at">Sort By:</option>
         <option value="created_at">Date</option>
         <option value="comment_count">Comment count</option>
         <option value="votes">Votes</option>

@@ -53,7 +53,12 @@ export default function ArticleInfo() {
         setLoading(false);
       })
       .catch((err) => {
-        setError("Failed to load article data.");
+        if (err.status === 404) {
+          setError("404: Article not found.");
+        } else if (err.status === 400) {
+          setError("400: Invalid article request");
+        }
+
         setLoading(false);
       });
   }, [article_id]);
@@ -62,7 +67,7 @@ export default function ArticleInfo() {
     return <p>Loading..</p>;
   }
   if (error) {
-    return <p>{error}</p>;
+    return <p className="text-center p-10 underline">{error}</p>;
   }
   return (
     <div className="bg-gray-100 min-h-screen p-6">

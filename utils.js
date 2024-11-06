@@ -5,11 +5,12 @@ const api = axios.create({
 
 export const getArticles = (params, topic) => {
   if (topic) {
+    console.log(params, topic);
     return api
       .get(`/articles?topic=${topic}`, {
         params: {
-          queryVal: params.queryVal,
-          order: params.order,
+          sort_by: params.queryVal,
+          order_by: params.order,
         },
       })
       .then((res) => {
@@ -24,7 +25,6 @@ export const getArticles = (params, topic) => {
         },
       })
       .then((res) => {
-        console.log(res);
         return res.data.articles;
       });
   }

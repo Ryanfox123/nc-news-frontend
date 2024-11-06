@@ -3,16 +3,13 @@ import ArticleCard from "../ArticleCard";
 import { getArticles } from "../../../utils";
 import SortingArticlesMenu from "./SortingArticlesMenu";
 
-function ArticleList() {
+function ArticleList({ sortByVals, setSortByVals }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sortByVals, setSortByVals] = useState({
-    queryVal: "created_at",
-    order: "DESC",
-  });
 
   useEffect(() => {
+    console.log(sortByVals);
     getArticles(sortByVals)
       .then((articles) => {
         setArticles(articles[0]);
@@ -25,7 +22,7 @@ function ArticleList() {
   }, [sortByVals]);
 
   if (loading) return <p>Loading..</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p className="text-center p-10">{error}</p>;
 
   return (
     <div className="mx-auto p-4shadow-md rounded-lg w-4/5">
@@ -34,7 +31,7 @@ function ArticleList() {
         {articles ? (
           articles.map((article) => (
             <li key={article.article_id}>
-              <ArticleCard article={article} />
+              <ArticleCard article={article} setSortByVals={setSortByVals} />
             </li>
           ))
         ) : (
