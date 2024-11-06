@@ -3,15 +3,30 @@ const api = axios.create({
   baseURL: "https://nc-news-app-ftk2.onrender.com/api",
 });
 
-export const getArticles = (topic) => {
+export const getArticles = (params, topic) => {
   if (topic) {
-    return api.get(`/articles?topic=${topic}`).then((res) => {
-      return res.data.articles;
-    });
+    return api
+      .get(`/articles?topic=${topic}`, {
+        params: {
+          queryVal: params.queryVal,
+          order: params.order,
+        },
+      })
+      .then((res) => {
+        return res.data.articles;
+      });
   } else {
-    return api.get("/articles").then((res) => {
-      return res.data.articles;
-    });
+    return api
+      .get("/articles", {
+        params: {
+          sort_by: params.queryVal,
+          order_by: params.order,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        return res.data.articles;
+      });
   }
 };
 
