@@ -24,7 +24,7 @@ function CreateComment({ articleID, comments, setComments }) {
     setIsPosting(true);
     postCommentByID(articleID, comment, user.username)
       .then((res) => {
-        setComments([...comments, res]);
+        setComments([res, ...comments]);
         setComment("");
         setIsCommenting(false);
         setIsPosting(false);
@@ -36,28 +36,43 @@ function CreateComment({ articleID, comments, setComments }) {
   };
 
   return (
-    <div className="mx-auto p-4 shadow-md rounded-lg flex flex-col w-4/5 ">
+    <div className="flex flex-col items-center">
       {isCommenting ? (
-        <div className="mx-auto p-4 bg-gray-100 shadow-md rounded-lg flex flex-col w-4/5 mb-40 mt-10">
-          {isPosting && <p className="mb-3">Your comment is being posted..</p>}
+        <div className="p-6 bg-gray-50 shadow-lg rounded-lg flex flex-col w-full mb-5 mt-10">
+          {isPosting && (
+            <p className="mb-3 text-blue-600 font-semibold">
+              Your comment is being posted...
+            </p>
+          )}
           {isError && (
-            <p>
+            <p className="text-red-500 font-semibold">
               There was an error posting your comment, please try again later.
             </p>
           )}
-          <label htmlFor="create-comment">Write your comment here:</label>
+          <label
+            htmlFor="create-comment"
+            className="text-gray-700 font-semibold mb-2"
+          >
+            Write your comment here:
+          </label>
           <textarea
             id="create-comment"
             name="create-comment"
-            className="bg-white rounded-sm size-auto p-2"
+            className="bg-white border border-gray-300 rounded-md resize-none p-3 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             value={comment}
             onChange={handleComment}
+            rows="4"
           ></textarea>
-          <div className="flex flex-row justify-between mt-5">
-            <button onClick={handleCancelComment}>Cancel comment</button>
+          <div className="flex flex-row justify-between mt-5 space-x-2">
+            <button
+              onClick={handleCancelComment}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium rounded-md px-4 py-2 transition duration-200 ease-in-out"
+            >
+              Cancel
+            </button>
             <button
               onClick={handleSubmit}
-              className="bg-slate-200 rounded-md p-2"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md px-4 py-2 transition duration-200 ease-in-out"
             >
               Submit
             </button>
@@ -65,7 +80,7 @@ function CreateComment({ articleID, comments, setComments }) {
         </div>
       ) : (
         <button
-          className="bg-slate-200 rounded-md p-2"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md px-4 py-2 transition duration-200 ease-in-out mt-4 mb-3"
           onClick={() => {
             setIsCommenting(true);
           }}

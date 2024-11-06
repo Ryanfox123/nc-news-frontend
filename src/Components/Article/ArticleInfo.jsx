@@ -120,6 +120,11 @@ export default function ArticleInfo() {
       </section>
       <section className="mx-auto p-4 bg-white shadow-md rounded-lg flex flex-col w-4/5 mt-5">
         <h2 className="text-2xl font-bold mb-2 border-b-2 ">Comments</h2>
+        <CreateComment
+          comments={comments}
+          setComments={setComments}
+          articleID={currArticle.article_id}
+        />
         <ul>
           {comments.map((comment) => {
             return (
@@ -134,11 +139,6 @@ export default function ArticleInfo() {
           })}
         </ul>
       </section>
-      <CreateComment
-        comments={comments}
-        setComments={setComments}
-        articleID={currArticle.article_id}
-      />
     </div>
   );
 }
