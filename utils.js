@@ -36,6 +36,12 @@ export const getArticleByID = (id) => {
   });
 };
 
+export const getUserByUsername = (username) => {
+  return api.get(`/users/${username}`).then((res) => {
+    return res.data.user;
+  });
+};
+
 export const getTopics = () => {
   return api.get("/topics").then((res) => {
     return res.data.topics;
