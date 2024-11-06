@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import DeleteCommentBtn from "./deleteCommentBtn";
+import DeleteCommentBtn from "./DeleteCommentBtn";
 
 import { UserContext } from "../../context/UserContext";
 import { useContext } from "react";
