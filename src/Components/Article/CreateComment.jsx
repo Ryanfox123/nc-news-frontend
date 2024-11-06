@@ -22,12 +22,17 @@ function CreateComment({ articleID, comments, setComments }) {
 
   const handleSubmit = () => {
     setIsPosting(true);
+    if (comment.length === 0) {
+      setIsPosting(false);
+      return setIsError(true);
+    }
     postCommentByID(articleID, comment, user.username)
       .then((res) => {
         setComments([res, ...comments]);
         setComment("");
         setIsCommenting(false);
         setIsPosting(false);
+        setIsError(false);
       })
       .catch((err) => {
         setIsError(true);

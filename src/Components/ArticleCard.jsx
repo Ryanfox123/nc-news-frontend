@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-export default function ArticleCard({ article }) {
+export default function ArticleCard({ article, setSortByVals }) {
   return (
     <div className="flex flex-row bg-slate-100  p-2 rounded-lg shadow hover:shadow-md transition-shadow duration-300 w-full gap-x-4 items-start">
-      <Link to={`/article/${article.article_id}`}>
+      <Link
+        to={`/article/${article.article_id}`}
+        onClick={() => {
+          setSortByVals({});
+        }}
+      >
         <img
           className="rounded-lg h-[150px] w-[150px] object-cover"
           src={article.article_img_url}
@@ -13,7 +18,14 @@ export default function ArticleCard({ article }) {
       <div className="flex flex-col space-y-2">
         <div>
           <h3 className="text-2xl font-bold mb-1 text-gray-800 hover:text-sky-700 transition-colors duration-200">
-            <Link to={`/article/${article.article_id}`}>{article.title}</Link>
+            <Link
+              to={`/article/${article.article_id}`}
+              onClick={() => {
+                setSortByVals({});
+              }}
+            >
+              {article.title}
+            </Link>
           </h3>
           <p className="text-gray-600 text-sm">
             <strong>{article.topic}</strong>
@@ -32,7 +44,12 @@ export default function ArticleCard({ article }) {
           <strong>Votes:</strong> {article.votes}
         </p>
         <p className="text-blue-600 hover:underline text-sm">
-          <Link to={`/article/${article.article_id}`}>
+          <Link
+            to={`/article/${article.article_id}`}
+            onClick={() => {
+              setSortByVals({});
+            }}
+          >
             <strong>Comments:</strong> {article.comment_count}
           </Link>
         </p>
