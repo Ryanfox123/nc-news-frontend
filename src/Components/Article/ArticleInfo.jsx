@@ -65,36 +65,42 @@ export default function ArticleInfo() {
     return <p>{error}</p>;
   }
   return (
-    <div>
-      <section className="mx-auto p-4 bg-white shadow-md rounded-lg flex flex-row w-4/5">
-        <div>
+    <div className="bg-gray-100 min-h-screen p-6">
+      <section className="mx-auto p-6 bg-white shadow-lg rounded-lg flex flex-row w-4/5 mb-6 space-x-6">
+        <div className="flex-shrink-0 w-1/3">
           <img
-            className="rounded-lg mb-4 h-[300px] w-full p-2"
+            className="rounded-lg h-[300px] w-full object-cover"
             src={currArticle.article_img_url}
             alt={currArticle.title}
           />
         </div>
-        <div>
-          <div className="flex flex-row justify-between">
-            <h2 className="text-2xl font-bold mb-2">{currArticle.title}</h2>
-            <div className="flex flex-col w-max">
+        <div className="flex-grow">
+          <div className="flex flex-row justify-between items-start mb-4">
+            <h2 className="text-3xl font-bold text-gray-800">
+              {currArticle.title}
+            </h2>
+            <div className="flex flex-col items-center space-y-2">
               <button
-                className={`font-extrabold text-5xl ${
-                  upvote ? "text-red-500" : ""
+                className={`font-extrabold text-3xl ${
+                  upvote ? "text-red-500" : "text-gray-500 hover:text-red-500"
                 }`}
                 onClick={handleUpvote}
               >
                 +
               </button>
               <button
-                className={`font-extrabold text-5xl ${
-                  downvote ? "text-blue-500" : ""
+                className={`font-extrabold text-3xl ${
+                  downvote
+                    ? "text-blue-500"
+                    : "text-gray-500 hover:text-blue-500"
                 }`}
                 onClick={handleDownvote}
               >
                 -
               </button>
-              {commentError ? <p>{commentError}</p> : null}
+              {commentError && (
+                <p className="text-sm text-red-600 mt-1">{commentError}</p>
+              )}
             </div>
           </div>
           <p className="text-gray-600 mb-2">
@@ -103,10 +109,12 @@ export default function ArticleInfo() {
           <p className="text-gray-600 mb-2">
             <strong>Topic:</strong> {currArticle.topic}
           </p>
-          <h3 className="text-lg font-semibold mb-2">
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
             Author: {currArticle.author}
           </h3>
-          <p className="text-gray-800 mb-4">{currArticle.body}</p>
+          <p className="text-gray-700 mb-4 leading-relaxed">
+            {currArticle.body}
+          </p>
           <p className="text-gray-500 mb-2 italic">
             Published on:{" "}
             {currArticle.created_at
@@ -118,25 +126,29 @@ export default function ArticleInfo() {
           </p>
         </div>
       </section>
-      <section className="mx-auto p-4 bg-white shadow-md rounded-lg flex flex-col w-4/5 mt-5">
-        <h2 className="text-2xl font-bold mb-2 border-b-2 ">Comments</h2>
+
+      <section className="mx-auto p-6 bg-white shadow-lg rounded-lg flex flex-col w-4/5">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800 border-b-2 border-gray-300 pb-2">
+          Comments
+        </h2>
         <CreateComment
           comments={comments}
           setComments={setComments}
           articleID={currArticle.article_id}
         />
-        <ul>
-          {comments.map((comment) => {
-            return (
-              <li key={comment.comment_id} className="border-b-2">
-                <CommentCard
-                  comment={comment}
-                  currArticle={currArticle}
-                  setComments={setComments}
-                />
-              </li>
-            );
-          })}
+        <ul className="mt-4 space-y-4">
+          {comments.map((comment) => (
+            <li
+              key={comment.comment_id}
+              className="border-b border-gray-200 pb-4"
+            >
+              <CommentCard
+                comment={comment}
+                currArticle={currArticle}
+                setComments={setComments}
+              />
+            </li>
+          ))}
         </ul>
       </section>
     </div>

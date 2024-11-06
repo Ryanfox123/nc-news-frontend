@@ -9,14 +9,14 @@ function TopicList({ topics, setTopics }) {
     });
   }, []);
   return (
-    <div className="w-40 ml-3 bg-slate-200 p-4">
+    <div className="w-40 ml-3 bg-gray p-4 rounded-sm">
       <h2 className="underline font-extrabold mx-auto w-20 text-center mb-7">
         Topics
       </h2>
       <ul className="flex flex-col gap-4">
         {topics.map((topic) => {
           return (
-            <li key={topic.slug}>
+            <li key={topic.slug} className="border-b-2">
               <p className="hover:underline">
                 <Link to={`/t/${topic.slug}`}>{topic.slug}</Link>
               </p>
