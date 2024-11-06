@@ -23,7 +23,7 @@ function ArticleList() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="w-8/12 mx-auto">
+    <div className="mx-auto p-4shadow-md rounded-lg w-4/5">
       <ul className="flex flex-col gap-5">
         {articles ? (
           articles.map((article) => (
