@@ -25,7 +25,7 @@ function ArticleList({ sortByVals, setSortByVals }) {
   if (error) return <p className="text-center p-10">{error}</p>;
 
   return (
-    <div className="mx-auto p-4shadow-md rounded-lg w-4/5">
+    <div className="mx-auto p-4shadow-md rounded-lg w-4/5 mt-2">
       <SortingArticlesMenu setSortByVals={setSortByVals} />
       <ul className="flex flex-col gap-5">
         {articles ? (
