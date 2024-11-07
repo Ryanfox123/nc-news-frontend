@@ -9,7 +9,6 @@ function ArticleList({ sortByVals, setSortByVals }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log(sortByVals);
     getArticles(sortByVals)
       .then((articles) => {
         setArticles(articles[0]);
