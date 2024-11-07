@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import CommentCard from "./CommentCard";
 import { format } from "date-fns";
@@ -8,6 +8,7 @@ import {
   patchArticleVotes,
 } from "../../../utils";
 import CreateComment from "./createComment";
+import { UserContext } from "../../context/UserContext";
 
 export default function ArticleInfo() {
   const { article_id } = useParams();
@@ -18,8 +19,12 @@ export default function ArticleInfo() {
   const [upvote, setUpvote] = useState(false);
   const [downvote, setDownvote] = useState(false);
   const [commentError, setCommentError] = useState(null);
+  const { user } = useContext(UserContext);
 
   const handleUpvote = () => {
+    if (Object.keys(user).length === 0) {
+      return setCommentError("You must be logged in to vote on an article.");
+    }
     const voteChange = upvote ? -1 : downvote ? 2 : 1;
     setUpvote(!upvote);
     setDownvote(false);
@@ -32,6 +37,9 @@ export default function ArticleInfo() {
   };
 
   const handleDownvote = () => {
+    if (Object.keys(user).length === 0) {
+      return setCommentError("You must be logged in to vote on an article.");
+    }
     const voteChange = downvote ? 1 : upvote ? -2 : -1;
     setDownvote(!downvote);
     setUpvote(false);
@@ -87,7 +95,9 @@ export default function ArticleInfo() {
             <div className="flex flex-col items-center space-y-2">
               <button
                 className={`font-extrabold text-3xl ${
-                  upvote ? "text-red-500" : "text-gray-500 hover:text-red-500"
+                  upvote && Object.keys(user).length !== 0
+                    ? "text-red-500"
+                    : "text-gray-500 hover:text-red-500"
                 }`}
                 onClick={handleUpvote}
               >

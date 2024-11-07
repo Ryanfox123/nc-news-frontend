@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { postCommentByID } from "../../../utils";
 import { UserContext } from "../../context/UserContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 function CreateComment({ articleID, comments, setComments }) {
   const [isCommenting, setIsCommenting] = useState(false);
@@ -21,6 +22,7 @@ function CreateComment({ articleID, comments, setComments }) {
   };
 
   const handleSubmit = () => {
+    setIsError(false);
     setIsPosting(true);
     if (comment.length === 0) {
       setIsPosting(false);
@@ -37,12 +39,22 @@ function CreateComment({ articleID, comments, setComments }) {
       .catch((err) => {
         setIsError(true);
         setIsPosting(false);
+        console.log(err);
       });
   };
 
   return (
     <div className="flex flex-col items-center">
-      {isCommenting ? (
+      {Object.keys(user).length === 0 ? (
+        <p>
+          Please{" "}
+          <span className="underline">
+            {" "}
+            <Link to="/login">log in </Link>
+          </span>
+          to post a comment.
+        </p>
+      ) : isCommenting ? (
         <div className="p-6 bg-gray-50 shadow-lg rounded-lg flex flex-col w-full mb-5 mt-10">
           {isPosting && (
             <p className="mb-3 text-blue-600 font-semibold">

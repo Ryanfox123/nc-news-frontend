@@ -17,7 +17,7 @@ export default function ArticleCard({ article, setSortByVals }) {
       </Link>
       <div className="flex flex-col space-y-2">
         <div>
-          <h3 className="text-2xl font-bold mb-1 text-gray-800 hover:text-sky-700 transition-colors duration-200">
+          <h3 className="text-2xl font-bold mb-1 text-gray-800 hover:text-custom-turq2 transition-colors duration-200">
             <Link
               to={`/article/${article.article_id}`}
               onClick={() => {
@@ -43,7 +43,7 @@ export default function ArticleCard({ article, setSortByVals }) {
         <p className="text-gray-600 text-sm">
           <strong>Votes:</strong> {article.votes}
         </p>
-        <p className="text-blue-600 hover:underline text-sm">
+        <p className="text-custom-turq3 hover:underline text-sm">
           <Link
             to={`/article/${article.article_id}`}
             onClick={() => {

@@ -7,15 +7,29 @@ import { useNavigate } from "react-router-dom";
 function LoginPage() {
   const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState("");
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useContext(UserContext);
 
   const submitUsername = (e) => {
     e.preventDefault();
-    getUserByUsername(userLogin).then((res) => {
-      setUser(res);
-      setUserLogin("");
-      navigate("/");
-    });
+    if (userLogin.length === 0) {
+      return setError("Please enter a username to log in.");
+    }
+    setError(null);
+    setIsLoading(true);
+    getUserByUsername(userLogin)
+      .then((res) => {
+        setUser(res);
+        setUserLogin("");
+        setError(null);
+        setIsLoading(false);
+        navigate("/");
+      })
+      .catch((err) => {
+        setError("User not found, please enter a valid username to log in.");
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {});
@@ -50,8 +64,12 @@ function LoginPage() {
              hover:from-custom-turq hover:to-custom-turq2 
              active:bg-custom-turq3
              transition duration-200 ease-in-out cursor-pointer"
+                value="Log in"
               />
             </form>
+            <div className="text-center mt-5">
+              {isLoading ? <p>Logging in.. </p> : error ? <p>{error}</p> : null}
+            </div>
           </div>
           <div className=" text-white flex flex-col w-3/6 text-center bg-gradient-to-r from-custom-turq2 to-custom-turq">
             <h2 className="font-extrabold mt-20 text-2xl">Welcome to login</h2>
@@ -62,6 +80,9 @@ function LoginPage() {
           </div>
         </section>
       </div>
+      <p className="italic text-gray-500 text-center">
+        You can use the username: 'grumpy19' to log in.
+      </p>
     </div>
   );
 }

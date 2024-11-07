@@ -3,7 +3,7 @@ import TopicList from "./TopicList";
 
 function Home({ topics, setTopics, setSortByVals, sortByVals }) {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row bg-gray-100">
       <TopicList
         topics={topics}
         setTopics={setTopics}
