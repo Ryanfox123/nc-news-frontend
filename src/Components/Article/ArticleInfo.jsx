@@ -79,7 +79,7 @@ export default function ArticleInfo() {
   }
   return (
     <div className="bg-gray-100 min-h-screen p-6">
-      <section className="mx-auto p-6 bg-white shadow-lg rounded-lg flex flex-row w-4/5 mb-6 space-x-6">
+      <section className="mx-auto p-6 bg-white shadow-lg rounded-lg flex flex-row w-11/12 mb-6 space-x-6">
         <div className="flex-shrink-0 w-1/3">
           <img
             className="rounded-lg h-[300px] w-full object-cover"

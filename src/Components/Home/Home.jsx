@@ -9,7 +9,11 @@ function Home({ topics, setTopics, setSortByVals, sortByVals }) {
         setTopics={setTopics}
         setSortByVals={setSortByVals}
       />
-      <ArticleList setSortByVals={setSortByVals} sortByVals={sortByVals} />
+      <ArticleList
+        setSortByVals={setSortByVals}
+        sortByVals={sortByVals}
+        topics={topics}
+      />
     </div>
   );
 }

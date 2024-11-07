@@ -1,12 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ArticleCard from "../ArticleCard";
 import { getArticles } from "../../../utils";
 import SortingArticlesMenu from "./SortingArticlesMenu";
+import CreatePostBtn from "../CreatePostBtn";
+import { UserContext } from "../../context/UserContext";
+import PostArticle from "./PostArticle";
+import PostArticleForm from "./PostArticleForm";
 
-function ArticleList({ sortByVals, setSortByVals }) {
+function ArticleList({ sortByVals, setSortByVals, topics }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isPosting, setIsPosting] = useState(false);
+
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     getArticles(sortByVals)
@@ -24,8 +31,25 @@ function ArticleList({ sortByVals, setSortByVals }) {
   if (error) return <p className="text-center p-10">{error}</p>;
 
   return (
-    <div className="mx-auto p-4shadow-md rounded-lg w-4/5 mt-2">
-      <SortingArticlesMenu setSortByVals={setSortByVals} />
+    <div className="mx-auto p-4shadow-md rounded-lg w-4/5 mt-2 flex flex-col">
+      <div className="flex flex-row h-10 mb-2">
+        <div className="w-2/4">
+          {Object.keys(user).length === 0 ? null : !isPosting ? (
+            <CreatePostBtn setIsPosting={setIsPosting} />
+          ) : null}
+        </div>
+
+        <div className="align-bottom w-2/4">
+          <SortingArticlesMenu setSortByVals={setSortByVals} />
+        </div>
+      </div>
+      {isPosting && (
+        <PostArticleForm
+          setIsPosting={setIsPosting}
+          topics={topics}
+          setArticles={setArticles}
+        />
+      )}
       <ul className="flex flex-col gap-5">
         {articles ? (
           articles.map((article) => (
