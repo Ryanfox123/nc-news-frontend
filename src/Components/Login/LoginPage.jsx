@@ -55,7 +55,6 @@ function LoginPage() {
                 value={userLogin}
                 onChange={(e) => {
                   setUserLogin(e.target.value);
-                  console.log(userLogin);
                 }}
               />
               <input

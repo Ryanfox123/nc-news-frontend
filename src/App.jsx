@@ -15,10 +15,17 @@ function App() {
   });
   const location = useLocation();
 
+  const resetSortByVals = () => {
+    setSortByVals({});
+  };
+
   return (
     <>
       {location.pathname !== "/login" && (
-        <Header setSortByVals={setSortByVals} />
+        <Header
+          setSortByVals={setSortByVals}
+          resetSortByVals={resetSortByVals}
+        />
       )}
       <Routes>
         <Route path="/login" element={<LoginPage />} />
