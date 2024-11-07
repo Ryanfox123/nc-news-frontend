@@ -13,15 +13,15 @@ function Header({ resetSortByVals }) {
       ) : (
         <div className="flex flex-row justify-between p-2">
           <button
-            className="hover:cursor-pointer bg-gray-200 p-2 hover:bg-gray-300 rounded-xl border-white border"
+            className="hover:cursor-pointer text-white hover:border-black hover:text-black p-2  rounded-xl border-white border"
             onClick={() => {
               setUser({});
             }}
           >
             Sign out
           </button>
-          <p className="text-end p-2">
-            <Link to="/login">Signed in as: {user.username}</Link>
+          <p className="text-end p-2 text-white  rounded-xl border-white border">
+            Signed in as: {user.username}
           </p>
         </div>
       )}

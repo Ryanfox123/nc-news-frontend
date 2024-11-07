@@ -10,7 +10,7 @@ export default function ArticleCard({ article, setSortByVals }) {
         }}
       >
         <img
-          className="rounded-lg h-[150px] w-[150px] object-cover"
+          className="rounded-lg h-[200px] w-[200px] object-cover"
           src={article.article_img_url}
           alt={article.title}
         />

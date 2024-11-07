@@ -10,9 +10,7 @@ function TopicList({ topics, setTopics }) {
   }, []);
   return (
     <div className="w-40 ml-3 bg-gray p-4 rounded-sm">
-      <h2 className="underline font-extrabold mx-auto w-20 text-center mb-7">
-        Topics
-      </h2>
+      <h2 className="font-extrabold mx-auto w-20 text-center mb-7">Topics</h2>
       <ul className="flex flex-col gap-4">
         {topics.map((topic) => {
           return (

@@ -34,8 +34,10 @@ function TopicArticleList({ sortByVals, setSortByVals }) {
         </p>
       ) : (
         <>
-          <h2 className="font-extrabold text-3xl mb-2 ml-2">{topic}</h2>
-          <SortingArticlesMenu setSortByVals={setSortByVals} />
+          <div className="flex flex-row h-10 justify-between m-2">
+            <h2 className="font-extrabold text-3xl  ml-2">{topic}</h2>
+            <SortingArticlesMenu setSortByVals={setSortByVals} />
+          </div>
           {isLoading ? (
             <p>Loading articles..</p>
           ) : (

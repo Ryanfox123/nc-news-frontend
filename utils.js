@@ -4,30 +4,22 @@ const api = axios.create({
 });
 
 export const getArticles = (params, topic) => {
-  if (topic) {
-    console.log(params, topic);
-    return api
-      .get(`/articles?topic=${topic}`, {
-        params: {
-          sort_by: params.queryVal,
-          order_by: params.order,
-        },
-      })
-      .then((res) => {
-        return res.data.articles;
-      });
-  } else {
-    return api
-      .get("/articles", {
-        params: {
-          sort_by: params.queryVal,
-          order_by: params.order,
-        },
-      })
-      .then((res) => {
-        return res.data.articles;
-      });
-  }
+  const url = topic ? `/articles?topic=${topic}` : "/articles";
+
+  return api
+    .get(url, {
+      params: {
+        sort_by: params.queryVal,
+        order_by: params.order,
+      },
+    })
+    .then((res) => res.data.articles);
+};
+
+export const postArticle = (body) => {
+  return api.post("/articles/", body).then((res) => {
+    return res.data.article;
+  });
 };
 
 export const getArticleByID = (id) => {
