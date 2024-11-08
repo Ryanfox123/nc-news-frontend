@@ -9,6 +9,7 @@ import {
 } from "../../../utils";
 import CreateComment from "./createComment";
 import { UserContext } from "../../context/UserContext";
+import DeletePopup from "./DeletePopup";
 
 export default function ArticleInfo() {
   const { article_id } = useParams();
@@ -72,7 +73,7 @@ export default function ArticleInfo() {
   }, [article_id]);
 
   if (loading) {
-    return <p>Loading..</p>;
+    return <p className="p-20">Loading..</p>;
   }
   if (error) {
     return <p className="text-center p-10 underline">{error}</p>;
@@ -94,7 +95,7 @@ export default function ArticleInfo() {
             </h2>
             <div className="flex flex-col items-center space-y-2">
               <button
-                className={`font-extrabold text-3xl ${
+                className={`font-extrabold text-5xl ${
                   upvote && Object.keys(user).length !== 0
                     ? "text-red-500"
                     : "text-gray-500 hover:text-red-500"
@@ -104,7 +105,7 @@ export default function ArticleInfo() {
                 +
               </button>
               <button
-                className={`font-extrabold text-3xl ${
+                className={`font-extrabold text-5xl ${
                   downvote
                     ? "text-blue-500"
                     : "text-gray-500 hover:text-blue-500"
@@ -136,9 +137,12 @@ export default function ArticleInfo() {
               ? format(new Date(currArticle.created_at), "MMMM d, yyyy")
               : "Unknown date"}
           </p>
-          <p className="text-gray-600">
-            <strong>Comments:</strong> {currArticle.comment_count}
-          </p>
+          <div className="flex flex-row justify-between h-12">
+            <p className="text-gray-600">
+              <strong>Comments:</strong> {currArticle.comment_count}
+            </p>
+            {currArticle.author === user.username && <DeletePopup />}
+          </div>
         </div>
       </section>
 

@@ -26,7 +26,7 @@ function Header({ resetSortByVals }) {
         </div>
       )}
 
-      <h1 className="w-52 mx-auto font-extrabold text-4xl m-auto">
+      <h1 className="w-52 mx-auto font-extrabold text-4xl m-auto text-white hover:text-black">
         <Link
           to="/"
           onClick={() => {

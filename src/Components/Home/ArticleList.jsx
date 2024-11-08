@@ -27,7 +27,7 @@ function ArticleList({ sortByVals, setSortByVals, topics }) {
       });
   }, [sortByVals]);
 
-  if (loading) return <p>Loading..</p>;
+  if (loading) return <p className="text-center p-10">Loading..</p>;
   if (error) return <p className="text-center p-10">{error}</p>;
 
   return (

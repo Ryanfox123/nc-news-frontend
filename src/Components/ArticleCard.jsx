@@ -21,12 +21,12 @@ export default function ArticleCard({ article, setSortByVals }) {
             onError={() => setImageError(true)}
           />
         ) : (
-          <div className="h-[200px] w-[200px] flex items-center justify-center bg-gray-200 rounded-lg text-gray-700 font-medium">
+          <div className="h-[200px] w-[200px] flex items-center justify-center bg-custom-turq2 rounded-lg text-gray-700 font-medium">
             {article.title}
           </div>
         )}
       </Link>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col gap-4 space-y-2">
         <div>
           <h3 className="text-2xl font-bold mb-1 text-gray-800 hover:text-custom-turq2 transition-colors duration-200">
             <Link
@@ -51,19 +51,28 @@ export default function ArticleCard({ article, setSortByVals }) {
             ? format(new Date(article.created_at), "MMMM d, yyyy")
             : "Unknown date"}
         </p>
-        <p className="text-gray-600 text-sm">
-          <strong>Votes:</strong> {article.votes}
-        </p>
-        <p className="text-custom-turq3 hover:underline text-sm">
+        <div className="flex flex-row gap-2">
+          <img
+            src="src/assets/—Pngtree—vector up arrow icon_4187256.png"
+            className="w-5 h-5 bg-gray-300 rounded-3xl"
+          />
+          <p className="text-gray-600 text-sm ">{article.votes}</p>
           <Link
             to={`/article/${article.article_id}`}
             onClick={() => {
               setSortByVals({});
             }}
+            className="flex flex-row gap-2"
           >
-            <strong>Comments:</strong> {article.comment_count}
+            <img
+              className="w-5 h-5 bg-gray-300 rounded-3xl"
+              src="src/assets/Instagram-icon-template-on-transparent-background-PNG.png"
+            />
+            <p className="text-custom-turq3 hover:underline text-sm">
+              {article.comment_count}
+            </p>
           </Link>
-        </p>
+        </div>
       </div>
     </div>
   );
