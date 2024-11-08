@@ -1,19 +1,30 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+
 export default function ArticleCard({ article, setSortByVals }) {
+  const [imageError, setImageError] = useState(false);
+
   return (
-    <div className="flex flex-row bg-slate-100  p-2 rounded-lg shadow hover:shadow-md transition-shadow duration-300 w-full gap-x-4 items-start">
+    <div className="flex flex-row bg-slate-100 p-2 rounded-lg shadow hover:shadow-md transition-shadow duration-300 w-full gap-x-4 items-start">
       <Link
         to={`/article/${article.article_id}`}
         onClick={() => {
           setSortByVals({});
         }}
       >
-        <img
-          className="rounded-lg h-[200px] w-[200px] object-cover"
-          src={article.article_img_url}
-          alt={article.title}
-        />
+        {!imageError ? (
+          <img
+            className="rounded-lg h-[200px] w-[200px] object-cover"
+            src={article.article_img_url}
+            alt={article.title}
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="h-[200px] w-[200px] flex items-center justify-center bg-gray-200 rounded-lg text-gray-700 font-medium">
+            {article.title}
+          </div>
+        )}
       </Link>
       <div className="flex flex-col space-y-2">
         <div>
