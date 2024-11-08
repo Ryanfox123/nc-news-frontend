@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import upArrowIcon from "./assets/—Pngtree—vector up arrow icon_4187256.png";
+import commentIcon from "./assets/Instagram-icon-template-on-transparent-background-PNG.png";
 
 export default function ArticleCard({ article, setSortByVals }) {
   const [imageError, setImageError] = useState(false);
@@ -52,10 +54,7 @@ export default function ArticleCard({ article, setSortByVals }) {
             : "Unknown date"}
         </p>
         <div className="flex flex-row gap-2">
-          <img
-            src="src/assets/—Pngtree—vector up arrow icon_4187256.png"
-            className="w-5 h-5 bg-gray-300 rounded-3xl"
-          />
+          <img src={upArrowIcon} className="w-5 h-5 bg-gray-300 rounded-3xl" />
           <p className="text-gray-600 text-sm ">{article.votes}</p>
           <Link
             to={`/article/${article.article_id}`}
@@ -66,7 +65,7 @@ export default function ArticleCard({ article, setSortByVals }) {
           >
             <img
               className="w-5 h-5 bg-gray-300 rounded-3xl"
-              src="src/assets/Instagram-icon-template-on-transparent-background-PNG.png"
+              src={commentIcon}
             />
             <p className="text-custom-turq3 hover:underline text-sm">
               {article.comment_count}
