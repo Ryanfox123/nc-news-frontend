@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import upArrowIcon from "./assets/—Pngtree—vector up arrow icon_4187256.png";
-import commentIcon from "./assets/Instagram-icon-template-on-transparent-background-PNG.png";
+import upArrowIcon from "../assets/—Pngtree—vector up arrow icon_4187256.png";
+import commentIcon from "../assets/Instagram-icon-template-on-transparent-background-PNG.png";
 
 export default function ArticleCard({ article, setSortByVals }) {
   const [imageError, setImageError] = useState(false);
@@ -23,7 +23,7 @@ export default function ArticleCard({ article, setSortByVals }) {
             onError={() => setImageError(true)}
           />
         ) : (
-          <div className="h-[200px] w-[200px] flex items-center justify-center bg-custom-turq2 rounded-lg text-gray-700 font-medium">
+          <div className="h-[200px] w-[200px] flex items-center justify-center bg-emerald-800 rounded-lg text-gray-200 font-medium">
             {article.title}
           </div>
         )}
@@ -54,8 +54,14 @@ export default function ArticleCard({ article, setSortByVals }) {
             : "Unknown date"}
         </p>
         <div className="flex flex-row gap-2">
-          <img src={upArrowIcon} className="w-5 h-5 bg-gray-300 rounded-3xl" />
-          <p className="text-gray-600 text-sm ">{article.votes}</p>
+          <img
+            src={upArrowIcon}
+            className="w-5 h-5 bg-gray-300 rounded-3xl "
+            aria-hidden="true"
+          />
+          <p className="text-gray-600 text-sm font-bold">
+            {article.votes} <span className="sr-only">votes</span>
+          </p>
           <Link
             to={`/article/${article.article_id}`}
             onClick={() => {
@@ -66,9 +72,11 @@ export default function ArticleCard({ article, setSortByVals }) {
             <img
               className="w-5 h-5 bg-gray-300 rounded-3xl"
               src={commentIcon}
+              aria-hidden="true"
             />
-            <p className="text-custom-turq3 hover:underline text-sm">
+            <p className="text-emerald-900 hover:underline text-sm font-bold">
               {article.comment_count}
+              <span className="sr-only"> comments</span>
             </p>
           </Link>
         </div>

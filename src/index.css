@@ -6,3 +6,9 @@ body {
   font-family: Nunito;
   background-color: rgba(223, 223, 223, 0.877);
 }
+
+.wysiwyg {
+  b {
+    @apply font-bold text-red-800;
+  }
+}

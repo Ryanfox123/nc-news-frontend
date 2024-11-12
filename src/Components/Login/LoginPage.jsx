@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { useContext } from "react";
 import { getUserByUsername } from "../../../utils";
@@ -10,7 +10,8 @@ function LoginPage() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useContext(UserContext);
-
+  let [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams.get("rtn"));
   const submitUsername = (e) => {
     e.preventDefault();
     if (userLogin.length === 0) {
@@ -20,11 +21,12 @@ function LoginPage() {
     setIsLoading(true);
     getUserByUsername(userLogin)
       .then((res) => {
+        const rtn = searchParams.get("rtn") ?? "/";
         setUser(res);
         setUserLogin("");
         setError(null);
         setIsLoading(false);
-        navigate("/");
+        navigate(rtn);
       })
       .catch((err) => {
         setError("User not found, please enter a valid username to log in.");

@@ -97,8 +97,8 @@ export default function ArticleInfo() {
               <button
                 className={`font-extrabold text-5xl ${
                   upvote && Object.keys(user).length !== 0
-                    ? "text-red-500"
-                    : "text-gray-500 hover:text-red-500"
+                    ? "text-custom-turq2"
+                    : "text-gray-500 hover:text-custom-turq2"
                 }`}
                 onClick={handleUpvote}
               >
@@ -106,9 +106,7 @@ export default function ArticleInfo() {
               </button>
               <button
                 className={`font-extrabold text-5xl ${
-                  downvote
-                    ? "text-blue-500"
-                    : "text-gray-500 hover:text-blue-500"
+                  downvote ? "text-red-500" : "text-gray-500 hover:text-red-500"
                 }`}
                 onClick={handleDownvote}
               >
@@ -128,9 +126,10 @@ export default function ArticleInfo() {
           <h3 className="text-lg font-semibold text-gray-800 mb-2">
             Author: {currArticle.author}
           </h3>
-          <p className="text-gray-700 mb-4 leading-relaxed">
-            {currArticle.body}
-          </p>
+          <div
+            className="wysiwyg"
+            dangerouslySetInnerHTML={{ __html: currArticle.body }}
+          />
           <p className="text-gray-500 mb-2 italic">
             Published on:{" "}
             {currArticle.created_at

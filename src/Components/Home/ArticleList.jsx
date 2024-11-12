@@ -4,14 +4,15 @@ import { getArticles } from "../../../utils";
 import SortingArticlesMenu from "./SortingArticlesMenu";
 import CreatePostBtn from "../CreatePostBtn";
 import { UserContext } from "../../context/UserContext";
-import PostArticle from "./PostArticle";
 import PostArticleForm from "./PostArticleForm";
+import Pagination from "../pagination";
 
 function ArticleList({ sortByVals, setSortByVals, topics }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isPosting, setIsPosting] = useState(false);
+  const [pageInfo, setPageInfo] = useState({});
 
   const { user } = useContext(UserContext);
 
@@ -19,6 +20,8 @@ function ArticleList({ sortByVals, setSortByVals, topics }) {
     getArticles(sortByVals)
       .then((articles) => {
         setArticles(articles[0]);
+        setPageInfo(articles[1]);
+        console.log(pageInfo);
         setLoading(false);
       })
       .catch((err) => {
@@ -61,6 +64,7 @@ function ArticleList({ sortByVals, setSortByVals, topics }) {
           <li>No articles available</li>
         )}
       </ul>
+      <Pagination />
     </div>
   );
 }

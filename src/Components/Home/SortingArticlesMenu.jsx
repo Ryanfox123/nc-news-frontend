@@ -13,13 +13,19 @@ function SortingArticlesMenu({ setSortByVals }) {
   };
   return (
     <div className="flex flex-row gap-3 justify-end mb-3">
-      <p className="pt-1">Sort by:</p>
+      <label htmlFor="sort-by-val" className="pt-1">
+        Sort by:
+      </label>
       <select id="sort-by-val" onChange={handleQueryChange}>
         <option value="created_at">Date</option>
         <option value="comment_count">Comment count</option>
         <option value="votes">Votes</option>
       </select>
-      <select id="sort-by-order" onChange={handleOrderChange}>
+      <select
+        id="sort-by-order"
+        aria-label="Sort order:"
+        onChange={handleOrderChange}
+      >
         <option value="DESC">Descending</option>
         <option value="ASC">Ascending</option>
       </select>
