@@ -1,20 +1,20 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import { LogInBtn } from "./LogInBtn";
 
 function Header({ resetSortByVals }) {
   const { user, setUser } = useContext(UserContext);
   return (
     <div className="bg-gradient-to-r from-custom-turq2 to-custom-turq h-40 shadow-md">
       {Object.keys(user).length === 0 ? (
-        <p className="underline text-end p-2">
-          <Link to="/login">Log in</Link>
-        </p>
+        <LogInBtn />
       ) : (
         <div className="flex flex-row justify-between p-2">
           <button
             className="hover:cursor-pointer text-white hover:border-black hover:text-black p-2  rounded-xl border-white border"
             onClick={() => {
+              localStorage.removeItem("user");
               setUser({});
             }}
           >

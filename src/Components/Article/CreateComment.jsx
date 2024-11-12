@@ -97,7 +97,7 @@ function CreateComment({ articleID, comments, setComments }) {
         </div>
       ) : (
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md px-4 py-2 transition duration-200 ease-in-out mt-4 mb-3"
+          className="bg-custom-turq hover:bg-custom-turq2 text-gray- font-semibold rounded-md px-4 py-2 transition duration-200 ease-in-out mt-4 mb-3"
           onClick={() => {
             setIsCommenting(true);
           }}
